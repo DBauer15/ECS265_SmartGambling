@@ -38,7 +38,9 @@ contract SmartRoulette {
     function EnterBet(uint _bet_type) public payable {
         require(isRoundOpen == true, "No bets are accepted");
 
-        addresses.push(msg.sender);
+        if (bets[msg.sender].length == 0) {
+            addresses.push(msg.sender);
+        }
         bets[msg.sender].push(Bet({
             amount: msg.value,
             bet_type: _bet_type,
