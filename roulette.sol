@@ -36,6 +36,7 @@ contract SmartRoulette {
         PLAYER ACTIONS
     */
     function EnterBet(uint _bet_type) public payable {
+        // TODO check if player has enough funds.. do we need to check that?
         require(isRoundOpen == true, "No bets are accepted");
 
         if (bets[msg.sender].length == 0) {
@@ -53,6 +54,7 @@ contract SmartRoulette {
         CROUPIER ACTIONS
     */
     function StartRound() public onlyBy(croupier) {
+        // This has to be payable since winners need funds to be payed out
         require(isRoundOpen == false, "Round already open");
 
         //ResetBets();
