@@ -114,7 +114,7 @@ contract SmartRoulette {
 
         for (uint i = 0; i < addresses.length; i++) {
             for (uint j = 0; j < bets[addresses[i]].length; j++) {
-                n = uint256(keccak256(abi.encodePacked(n, bets[addresses[i]][j].betType, addresses[i])));
+                n = uint256(keccak256(abi.encodePacked(n, bets[addresses[i]][j].betType, bets[addresses[i]][j].betNumber, addresses[i])));
             }
         }
 
