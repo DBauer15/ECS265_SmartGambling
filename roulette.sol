@@ -23,7 +23,7 @@ contract SmartRoulette {
 
     // Events for game status change
     event RoundStarted();
-    event RoundEnded();
+    event RoundEnded(uint);
 
     // This modifier can be used to restrict some function calls
     modifier onlyBy(address _account) {
@@ -50,6 +50,8 @@ contract SmartRoulette {
 
         require(betHelper.ValidateBet(bet) == true, "Invalid bet not accepted");
 
+        // Check if the player has already entered a bet
+        // If not, add him to the list
         if (bets[msg.sender].length == 0) {
             addresses.push(msg.sender);
         }
@@ -66,21 +68,21 @@ contract SmartRoulette {
         // Adjust the bank value
         bank += msg.value;
 
-        //ResetBets();
         isRoundOpen = true;
         emit RoundStarted();
     }
 
     function EndRound() public onlyBy(croupier) {
         require(isRoundOpen == true, "Round already closed");
-        isRoundOpen = false;
 
         uint roundResult = GenerateRoundResult();
+        emit RoundEnded(roundResult);
+
+        isRoundOpen = false;
+
         EvaluateBets(roundResult);
         Payout();
         ClearBetPool();
-
-        emit RoundEnded();
     }
 
     function CroupierWithdraw() public onlyBy(croupier) {
@@ -107,9 +109,16 @@ contract SmartRoulette {
         PRIVATE FUNCTIONS
     */
 
-    function GenerateRoundResult() private pure returns(uint) {
-        // TODO generate a real result randomly
-        return 1;
+    function GenerateRoundResult() private view returns(uint) {
+        uint256 n = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty)));
+
+        for (uint i = 0; i < addresses.length; i++) {
+            for (uint j = 0; j < bets[addresses[i]].length; j++) {
+                n = uint256(keccak256(abi.encodePacked(n, bets[addresses[i]][j].betType, bets[addresses[i]][j].betNumber, addresses[i])));
+            }
+        }
+
+        return n%37;
     }
 
     function EvaluateBets(uint roundResult) private {
@@ -126,10 +135,14 @@ contract SmartRoulette {
             for (uint j = 0; j < bets[addresses[i]].length; j++) {
                 BetHelper.Bet storage bet = bets[addresses[i]][j];
                 if (bet.won == false) {
+                    // The bank keeps the bet amount
                     bank += bet.amount;
                 } else {
+                    // Profit is the pure profit of this bet without the initial bet amount
                     uint profit = bet.amount * betHelper.GetBetStakes(bet.betType);
+                    // Prize is the combined profit and initial bet
                     uint prize = bet.amount + profit;
+                    // The bank only has to pay the profit
                     bank -= profit;
                     addresses[i].transfer(prize);
                 }
