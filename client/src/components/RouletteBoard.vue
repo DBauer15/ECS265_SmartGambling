@@ -1,22 +1,19 @@
 <template>
   <div>
-    <!--
-        <div style="float: left">
-            <BoardCell :config="{
-                number: 0,
-                color: colors[2]
-            }"></BoardCell>
-        </div>
-        -->
     <table>
       <tbody>
+
         <tr>
+        <td rowspan="5">
+          <img src="../assets/wheel.png" width=300 style="margin-right: 2em;">
+        </td>
           <td rowspan="3">
             <div>
               <BoardCell
+                style="height: 100% !important"
                 :config="{
-                  number: 0,
-                  color: colors[3]
+                  text: 0,
+                  type: colors[2],
                 }"
               ></BoardCell>
             </div>
@@ -28,7 +25,7 @@
                   <BoardCell
                     style="float:left"
                     :config="{
-                      number: board_numbers[i - 1][j - 1],
+                      text: board_numbers[i - 1][j - 1],
                       type: colors[board_colors[i - 1][j - 1]]
                     }"
                   ></BoardCell>
@@ -36,7 +33,7 @@
                     style="float:left"
                     v-if="j != 12"
                     :config="{
-                      number: null,
+                      text: null,
                       type: 'split-v'
                     }"
                   ></BoardCell>
@@ -45,7 +42,7 @@
                     style="float:left"
                     v-if="i != 3"
                     :config="{
-                      number: null,
+                      text: null,
                       type: 'split-h'
                     }"
                   ></BoardCell>
@@ -53,7 +50,7 @@
                     style="float:left"
                     v-if="j != 12 && i != 3"
                     :config="{
-                      number: null,
+                      text: null,
                       type: 'corner'
                     }"
                   ></BoardCell>
@@ -62,81 +59,117 @@
               </div>
             </div>
           </td>
-          <td>asdf</td>
+          <td>
+            <BoardCell
+              style="float:left"
+              :config="{
+                      text: '2 to 1',
+                      type: 'special-v'
+                    }"
+            ></BoardCell>
+          </td>
         </tr>
         <tr>
-          <td>asdf</td>
+          <td>
+            <BoardCell
+              style="float:left"
+              :config="{
+                      text: '2 to 1',
+                      type: 'special-v'
+                    }"
+            ></BoardCell>
+          </td>
         </tr>
         <tr>
-          <td>asdf</td>
+          <td>
+            <BoardCell
+              style="float:left"
+              :config="{
+                      text: '2 to 1',
+                      type: 'special-v'
+                    }"
+            ></BoardCell>
+          </td>
         </tr>
         <tr>
           <td></td>
-          <td colspan="2">asdf</td>
-          <td colspan="2">asdf</td>
-          <td colspan="2">asdf</td>
+          <td colspan="2">
+            <BoardCell
+              style="float:left"
+              :config="{
+                      text: '1st 12',
+                      type: 'special-h3'
+                    }"
+            ></BoardCell>
+          </td>
+          <td colspan="2">
+            <BoardCell
+              style="float:left"
+              :config="{
+                      text: '2nd 12',
+                      type: 'special-h3'
+                    }"
+            ></BoardCell>
+          </td>
+          <td colspan="2">
+            <BoardCell
+              style="float:left"
+              :config="{
+                      text: '3rd 12',
+                      type: 'special-h3'
+                    }"
+            ></BoardCell>
+          </td>
           <td></td>
         </tr>
         <tr>
           <td></td>
-          <td>asdf</td>
-          <td>asdf</td>
-          <td colspan="2">asdf</td>
-          <td>asdf</td>
-          <td>asdf</td>
+          <td><BoardCell
+              style="float:left"
+              :config="{
+                      text: '1 to 18',
+                      type: 'special-h2'
+                    }"
+            ></BoardCell></td>
+          <td><BoardCell
+              style="float:left"
+              :config="{
+                      text: 'Even',
+                      type: 'special-h2'
+                    }"
+            ></BoardCell></td>
+          <td><BoardCell
+              style="float:left;"
+              :config="{
+                      text: '♦ Red',
+                      type: 'special-h2'
+                    }"
+            ></BoardCell></td>
+          <td><BoardCell
+              style="float:left;"
+              :config="{
+                      text: '♦ Black',
+                      type: 'special-h2'
+                    }"
+            ></BoardCell></td>
+          <td><BoardCell
+              style="float:left"
+              :config="{
+                      text: 'Odd',
+                      type: 'special-h2'
+                    }"
+            ></BoardCell></td>
+            <td><BoardCell
+              style="float:left"
+              :config="{
+                      text: '19 to 36',
+                      type: 'special-h2'
+                    }"
+            ></BoardCell></td>
           <td></td>
         </tr>
       </tbody>
     </table>
-
-    <div>
-      <div v-for="i in 3" style="float: left">
-        <div v-for="j in 12" style="float: left">
-          <BoardCell
-            style="float:left"
-            :config="{
-              number: board_numbers[i - 1][j - 1],
-              type: colors[board_colors[i - 1][j - 1]]
-            }"
-          ></BoardCell>
-          <BoardCell
-            style="float:left"
-            v-if="j != 12"
-            :config="{
-              number: null,
-              type: 'split-v'
-            }"
-          ></BoardCell>
-          <div class="clearfix"></div>
-          <BoardCell
-            style="float:left"
-            v-if="i != 3"
-            :config="{
-              number: null,
-              type: 'split-h'
-            }"
-          ></BoardCell>
-          <BoardCell
-            style="float:left"
-            v-if="j != 12 && i != 3"
-            :config="{
-              number: null,
-              type: 'corner'
-            }"
-          ></BoardCell>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-    <!--
-        <div style="float: left">
-            <BoardCell :config="{
-                number: 0,
-                color: colors[3]
-            }">
-            </BoardCell>
-        </div>
-        -->
   </div>
 </template>
 
@@ -149,7 +182,7 @@ export default {
   },
   data() {
     return {
-      colors: ["red", "black", "green", "gray", "white"],
+      colors: ["red", "black", "green"],
       board_colors: [
         [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0],
         [1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
@@ -166,8 +199,11 @@ export default {
 </script>
 
 <style>
+table {
+  border: none;
+}
 th,
 td {
-  border: 1px solid black;
+  border: none;
 }
 </style>
