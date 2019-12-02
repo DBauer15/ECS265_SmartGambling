@@ -13,7 +13,9 @@
                 style="height: 100% !important"
                 :config="{
                   text: 0,
-                  type: colors[2],
+                  bet_type: 5,
+                  bet_number: 0,
+                  class: colors[2],
                 }"
               ></BoardCell>
             </div>
@@ -26,7 +28,9 @@
                     style="float:left"
                     :config="{
                       text: board_numbers[i - 1][j - 1],
-                      type: colors[board_colors[i - 1][j - 1]]
+                      class: colors[board_colors[i - 1][j - 1]],
+                      bet_type: 5,
+                      bet_number: board_numbers[i - 1][j - 1],
                     }"
                   ></BoardCell>
                   <BoardCell
@@ -34,7 +38,9 @@
                     v-if="j != 12"
                     :config="{
                       text: null,
-                      type: 'split-v'
+                      class: 'split-v',
+                      bet_type: 6,
+                      bet_number: -1, //TODO: Generate correct bet number
                     }"
                   ></BoardCell>
                   <div class="clearfix"></div>
@@ -43,7 +49,9 @@
                     v-if="i != 3"
                     :config="{
                       text: null,
-                      type: 'split-h'
+                      class: 'split-h',
+                      bet_type: 6,
+                      bet_number: -1, //TODO: Generate correct bet number
                     }"
                   ></BoardCell>
                   <BoardCell
@@ -51,7 +59,9 @@
                     v-if="j != 12 && i != 3"
                     :config="{
                       text: null,
-                      type: 'corner'
+                      class: 'corner',
+                      bet_type: 8,
+                      bet_number: -1, //TODO: Generate correct bet number
                     }"
                   ></BoardCell>
                 </div>
@@ -64,7 +74,9 @@
               style="float:left"
               :config="{
                       text: '2 to 1',
-                      type: 'special-v'
+                      class: 'special-v',
+                      bet_type: 4,
+                      bet_number: 2,
                     }"
             ></BoardCell>
           </td>
@@ -75,7 +87,9 @@
               style="float:left"
               :config="{
                       text: '2 to 1',
-                      type: 'special-v'
+                      class: 'special-v',
+                      bet_type: 4,
+                      bet_number: 1,
                     }"
             ></BoardCell>
           </td>
@@ -86,7 +100,9 @@
               style="float:left"
               :config="{
                       text: '2 to 1',
-                      type: 'special-v'
+                      class: 'special-v',
+                      bet_type: 4,
+                      bet_number: 0,
                     }"
             ></BoardCell>
           </td>
@@ -98,7 +114,9 @@
               style="float:left"
               :config="{
                       text: '1st 12',
-                      type: 'special-h3'
+                      class: 'special-h3',
+                      bet_type: 3,
+                      bet_number: 0,
                     }"
             ></BoardCell>
           </td>
@@ -107,7 +125,9 @@
               style="float:left"
               :config="{
                       text: '2nd 12',
-                      type: 'special-h3'
+                      class: 'special-h3',
+                      bet_type: 3,
+                      bet_number: 1,
                     }"
             ></BoardCell>
           </td>
@@ -116,7 +136,9 @@
               style="float:left"
               :config="{
                       text: '3rd 12',
-                      type: 'special-h3'
+                      class: 'special-h3',
+                      bet_type: 3,
+                      bet_number: 2,
                     }"
             ></BoardCell>
           </td>
@@ -128,42 +150,54 @@
               style="float:left"
               :config="{
                       text: '1 to 18',
-                      type: 'special-h2'
+                      class: 'special-h2',
+                      bet_type: 2,
+                      bet_number: 0,
                     }"
             ></BoardCell></td>
           <td><BoardCell
               style="float:left"
               :config="{
                       text: 'Even',
-                      type: 'special-h2'
+                      class: 'special-h2',
+                      bet_type: 1,
+                      bet_number: 1,
                     }"
             ></BoardCell></td>
           <td><BoardCell
               style="float:left;"
               :config="{
                       text: '♦ Red',
-                      type: 'special-h2'
+                      class: 'special-h2',
+                      bet_type: 0,
+                      bet_number: 0,
                     }"
             ></BoardCell></td>
           <td><BoardCell
               style="float:left;"
               :config="{
                       text: '♦ Black',
-                      type: 'special-h2'
+                      class: 'special-h2',
+                      bet_type: 0,
+                      bet_number: 1,
                     }"
             ></BoardCell></td>
           <td><BoardCell
               style="float:left"
               :config="{
                       text: 'Odd',
-                      type: 'special-h2'
+                      class: 'special-h2',
+                      bet_type: 1,
+                      bet_number: 0,
                     }"
             ></BoardCell></td>
             <td><BoardCell
               style="float:left"
               :config="{
                       text: '19 to 36',
-                      type: 'special-h2'
+                      class: 'special-h2',
+                      bet_type: 2,
+                      bet_number: 1,
                     }"
             ></BoardCell></td>
           <td></td>
@@ -177,6 +211,9 @@
 import BoardCell from "./BoardCell.vue";
 
 export default {
+  mounted() {
+    this.$root.$on('add_bet', this.add_bet)
+  },
   components: {
     BoardCell
   },
@@ -194,8 +231,14 @@ export default {
         [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34]
       ]
     };
+  },
+  methods: {
+    add_bet(type, number) {
+      console.log(type, number)
+    }
   }
 };
+
 </script>
 
 <style>

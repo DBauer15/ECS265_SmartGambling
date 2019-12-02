@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="board-cell" :class="getCellColorClass()">
+  <div v-on:click="add_bet" class="board-cell" :class="getCellColorClass()">
       {{config.text}}
   </div>
 
@@ -15,8 +15,11 @@ export default {
   },
   methods: {
     getCellColorClass() {
-        return 'board-cell-' + this.config.type;
-    }
+        return 'board-cell-' + this.config.class;
+    },
+    add_bet(){
+        this.$root.$emit('add_bet', this.config.bet_type, this.config.bet_number);
+    },
   },
 }
 </script>
@@ -38,6 +41,12 @@ export default {
     .board-cell:hover {
         cursor: pointer;
         opacity: 0.7;
+    }
+    .board-cell:active {
+        cursor: pointer;
+        opacity: 1.0;
+        color: black;
+        background-color: yellow;
     }
     .board-cell-red {
         background-color: red
