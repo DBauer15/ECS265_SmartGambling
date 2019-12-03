@@ -4,7 +4,7 @@ pragma experimental ABIEncoderV2;
 
 import "./bethelper.sol";
 
-// TODO add more require() checks for state etc
+// TODO add method to get last outcome
 contract SmartRoulette {
 
     // Instance of the BetHelper

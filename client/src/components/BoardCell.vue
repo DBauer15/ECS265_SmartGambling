@@ -26,7 +26,7 @@ export default {
 
 <style>
     .board-cell {
-        border: 0.1em solid yellow;
+        border: 0.1em solid #FFD700;
         border-radius: 0.2em;
         height: 2em;
         width: 2em;
@@ -46,7 +46,7 @@ export default {
         cursor: pointer;
         opacity: 1.0;
         color: black;
-        background-color: yellow;
+        background-color: #FFD700;
     }
     .board-cell-red {
         background-color: red

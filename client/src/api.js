@@ -7,11 +7,15 @@ class Api {
 
     constructor() {
         this.web3 = new Web3(SERVER_ADDRESS)
-        this.contract = new this.web3.eth.Contract(Abi, '0xcE56341Fdea82B7D26609aAA2265998206486C1C')
+        this.contract = new this.web3.eth.Contract(Abi, '0x0B60Cf0f2547086567814f9f8BB9E408A9366962')
     }
 
     IsRoundOpen() {
         return this.contract.methods.IsRoundOpen().call()
+    }
+
+    EnterBet(bet_type, bet_number) {
+        return this.contract.methods.EnterBet(bet_type, bet_number).call()
     }
 }
 

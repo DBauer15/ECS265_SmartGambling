@@ -1,12 +1,16 @@
 <template>
   <div>
+    <GameStats></GameStats>
     <table>
       <tbody>
-
         <tr>
-        <td rowspan="5">
-          <img src="../assets/wheel.png" width=300 style="margin-right: 2em;">
-        </td>
+          <td rowspan="5">
+            <img
+              src="../assets/wheel.png"
+              width="300"
+              style="margin-right: 2em;"
+            />
+          </td>
           <td rowspan="3">
             <div>
               <BoardCell
@@ -15,7 +19,7 @@
                   text: 0,
                   bet_type: 5,
                   bet_number: 0,
-                  class: colors[2],
+                  class: colors[2]
                 }"
               ></BoardCell>
             </div>
@@ -30,7 +34,7 @@
                       text: board_numbers[i - 1][j - 1],
                       class: colors[board_colors[i - 1][j - 1]],
                       bet_type: 5,
-                      bet_number: board_numbers[i - 1][j - 1],
+                      bet_number: board_numbers[i - 1][j - 1]
                     }"
                   ></BoardCell>
                   <BoardCell
@@ -40,7 +44,7 @@
                       text: null,
                       class: 'split-v',
                       bet_type: 6,
-                      bet_number: -1, //TODO: Generate correct bet number
+                      bet_number: -1 //TODO: Generate correct bet number
                     }"
                   ></BoardCell>
                   <div class="clearfix"></div>
@@ -51,7 +55,7 @@
                       text: null,
                       class: 'split-h',
                       bet_type: 6,
-                      bet_number: -1, //TODO: Generate correct bet number
+                      bet_number: -1 //TODO: Generate correct bet number
                     }"
                   ></BoardCell>
                   <BoardCell
@@ -61,7 +65,7 @@
                       text: null,
                       class: 'corner',
                       bet_type: 8,
-                      bet_number: -1, //TODO: Generate correct bet number
+                      bet_number: -1 //TODO: Generate correct bet number
                     }"
                   ></BoardCell>
                 </div>
@@ -73,11 +77,28 @@
             <BoardCell
               style="float:left"
               :config="{
-                      text: '2 to 1',
-                      class: 'special-v',
-                      bet_type: 4,
-                      bet_number: 2,
-                    }"
+                text: '2 to 1',
+                class: 'special-v',
+                bet_type: 4,
+                bet_number: 2
+              }"
+            ></BoardCell>
+          </td>
+          <td rowspan="5">
+            <Chips>
+            </Chips>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <BoardCell
+              style="float:left"
+              :config="{
+                text: '2 to 1',
+                class: 'special-v',
+                bet_type: 4,
+                bet_number: 1
+              }"
             ></BoardCell>
           </td>
         </tr>
@@ -86,120 +107,119 @@
             <BoardCell
               style="float:left"
               :config="{
-                      text: '2 to 1',
-                      class: 'special-v',
-                      bet_type: 4,
-                      bet_number: 1,
-                    }"
+                text: '2 to 1',
+                class: 'special-v',
+                bet_type: 4,
+                bet_number: 0
+              }"
             ></BoardCell>
           </td>
         </tr>
         <tr>
+          <td></td>
+          <td colspan="2">
+            <BoardCell
+              style="float:left"
+              :config="{
+                text: '1st 12',
+                class: 'special-h3',
+                bet_type: 3,
+                bet_number: 0
+              }"
+            ></BoardCell>
+          </td>
+          <td colspan="2">
+            <BoardCell
+              style="float:left"
+              :config="{
+                text: '2nd 12',
+                class: 'special-h3',
+                bet_type: 3,
+                bet_number: 1
+              }"
+            ></BoardCell>
+          </td>
+          <td colspan="2">
+            <BoardCell
+              style="float:left"
+              :config="{
+                text: '3rd 12',
+                class: 'special-h3',
+                bet_type: 3,
+                bet_number: 2
+              }"
+            ></BoardCell>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
           <td>
             <BoardCell
               style="float:left"
               :config="{
-                      text: '2 to 1',
-                      class: 'special-v',
-                      bet_type: 4,
-                      bet_number: 0,
-                    }"
+                text: '1 to 18',
+                class: 'special-h2',
+                bet_type: 2,
+                bet_number: 0
+              }"
             ></BoardCell>
           </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td colspan="2">
+          <td>
             <BoardCell
               style="float:left"
               :config="{
-                      text: '1st 12',
-                      class: 'special-h3',
-                      bet_type: 3,
-                      bet_number: 0,
-                    }"
+                text: 'Even',
+                class: 'special-h2',
+                bet_type: 1,
+                bet_number: 1
+              }"
             ></BoardCell>
           </td>
-          <td colspan="2">
+          <td>
             <BoardCell
-              style="float:left"
-              :config="{
-                      text: '2nd 12',
-                      class: 'special-h3',
-                      bet_type: 3,
-                      bet_number: 1,
-                    }"
-            ></BoardCell>
-          </td>
-          <td colspan="2">
-            <BoardCell
-              style="float:left"
-              :config="{
-                      text: '3rd 12',
-                      class: 'special-h3',
-                      bet_type: 3,
-                      bet_number: 2,
-                    }"
-            ></BoardCell>
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><BoardCell
-              style="float:left"
-              :config="{
-                      text: '1 to 18',
-                      class: 'special-h2',
-                      bet_type: 2,
-                      bet_number: 0,
-                    }"
-            ></BoardCell></td>
-          <td><BoardCell
-              style="float:left"
-              :config="{
-                      text: 'Even',
-                      class: 'special-h2',
-                      bet_type: 1,
-                      bet_number: 1,
-                    }"
-            ></BoardCell></td>
-          <td><BoardCell
               style="float:left;"
               :config="{
-                      text: '♦ Red',
-                      class: 'special-h2',
-                      bet_type: 0,
-                      bet_number: 0,
-                    }"
-            ></BoardCell></td>
-          <td><BoardCell
+                text: '♦ Red',
+                class: 'special-h2',
+                bet_type: 0,
+                bet_number: 0
+              }"
+            ></BoardCell>
+          </td>
+          <td>
+            <BoardCell
               style="float:left;"
               :config="{
-                      text: '♦ Black',
-                      class: 'special-h2',
-                      bet_type: 0,
-                      bet_number: 1,
-                    }"
-            ></BoardCell></td>
-          <td><BoardCell
+                text: '♦ Black',
+                class: 'special-h2',
+                bet_type: 0,
+                bet_number: 1
+              }"
+            ></BoardCell>
+          </td>
+          <td>
+            <BoardCell
               style="float:left"
               :config="{
-                      text: 'Odd',
-                      class: 'special-h2',
-                      bet_type: 1,
-                      bet_number: 0,
-                    }"
-            ></BoardCell></td>
-            <td><BoardCell
+                text: 'Odd',
+                class: 'special-h2',
+                bet_type: 1,
+                bet_number: 0
+              }"
+            ></BoardCell>
+          </td>
+          <td>
+            <BoardCell
               style="float:left"
               :config="{
-                      text: '19 to 36',
-                      class: 'special-h2',
-                      bet_type: 2,
-                      bet_number: 1,
-                    }"
-            ></BoardCell></td>
+                text: '19 to 36',
+                class: 'special-h2',
+                bet_type: 2,
+                bet_number: 1
+              }"
+            ></BoardCell>
+          </td>
           <td></td>
         </tr>
       </tbody>
@@ -209,13 +229,17 @@
 
 <script>
 import BoardCell from "./BoardCell.vue";
+import GameStats from "./GameStats.vue";
+import Chips from "./Chips.vue";
 
 export default {
   mounted() {
-    this.$root.$on('add_bet', this.add_bet)
+    this.$root.$on("add_bet", this.add_bet);
   },
   components: {
-    BoardCell
+    BoardCell,
+    GameStats,
+    Chips,
   },
   data() {
     return {
@@ -234,11 +258,10 @@ export default {
   },
   methods: {
     add_bet(type, number) {
-      console.log(type, number)
+      console.log(type, number);
     }
   }
 };
-
 </script>
 
 <style>
@@ -248,5 +271,20 @@ table {
 th,
 td {
   border: none;
+}
+.chips {
+  color: #ffd700;
+  border: solid 1em #ffd700;
+  width: 10em;
+}
+.chips:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+.chips:active {
+  cursor: pointer;
+  opacity: 1;
+  color: black;
+  background-color: #ffd700;
 }
 </style>
