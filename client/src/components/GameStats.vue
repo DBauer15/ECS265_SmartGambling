@@ -1,132 +1,68 @@
 <template>
-  <div class="game-stats">
-    <table class="game-stats-table">
-      <tr>
-        <th class="title" colspan="4">SMART GAMBLING</th>
-      </tr>
-      <tr>
-        <td class="game-stats-td">
-          <div class="bet-list scrolling">
-          <div v-for="bet in $store.state.bets">
-            {{bet.amount}} Ξ on {{bet.bet_type}}-{{bet.bet_number}}
-          </div>
-          </div>
-        </td>
-        <td class="game-stats-td" v-bind:class="$store.state.round_open ? 'round-open' : 'round-closed'">{{$store.state.round_open ? 'Round Open' : 'Round Closed'}}</td>
-        <td class="game-stats-td">
-          Last Prize: {{$store.state.last_prize}} Ξ<br>
-          Previous Winnings: {{$store.state.previous_winnings}} Ξ<br>
-          Value in Bets: {{$store.state.value_in_bets}} Ξ<br>
-          Total: {{$store.state.last_prize + $store.state.previous_winnings - $store.state.value_in_bets}} Ξ<br>
-          Round Result: {{$store.state.round_open || $store.state.round_result == -1 ? '-' : $store.state.round_result}}
-        </td>
-        <td class="game-stats-td">
-          <div class="bet-button" v-on:click="clear_bets">CLEAR</div><br/>
-          <div class="bet-button" v-bind:class="$store.state.round_open ? '' : 'bet-button-inactive'" v-on:click="send_bets">BET</div>
-        </td>
-      </tr>
-    </table>
+  <!-- game stats -->
+  <div class="game-stats-container">
+    <!-- logo -->
+    <div class="flex-grid">
+      <div class="col">
+        <img
+          src="../assets/logo_placeholder.png"
+          width="300"
+          class="wheel"
+          v-bind:class="$store.state.round_open ? 'wheel-spinning' : 'wheel-still'"
+        />
+      </div>
+    </div>
+    <!-- stats element container -->
+    <div class="flex-grid-thirds">
+      <GameRoundStatus></GameRoundStatus>
+      <GameBalanceStatus></GameBalanceStatus>
+      <GameRoundButtons></GameRoundButtons>
+    </div>
   </div>
 </template>
 
 <script>
-import Api from '../api'
-
+import GameRoundStatus from "./GameRoundStatus.vue";
+import GameBalanceStatus from "./GameBalanceStatus.vue";
+import GameRoundButtons from "./GameRoundButtons.vue";
 
 export default {
-  methods: {
-    clear_bets() {
-      this.$store.state.bets = []
-    },
-    send_bets() {
-      if (!this.$store.state.round_open) {
-        return
-      }
-
-      for (var bet of this.$store.state.bets) {
-        Api.EnterBet(bet.amount, bet.bet_type, bet.bet_number)
-      }
-
-      this.clear_bets()
-    },
+  components: {
+    GameRoundStatus,
+    GameBalanceStatus,
+    GameRoundButtons
   }
-
 };
 </script>
 
 <style>
-.round-closed {
-  font-size: 1.5em;
-  color: red
+.game-stats-container {
+  width: 70%;
+  height: 30em;
 }
 
-.round-open {
-  font-size: 1.5em;
-  color: yellow
+.game-stats-container .flex-grid {
+  display: flex;
 }
 
-.scrolling {
+.game-stats-container .flex-grid .col {
+  flex: 1;
+    height: 15em;
+}
+
+.game-stats-container .flex-grid-thirds {
+  display: flex;
+  justify-content: space-between;
+    height: 10em;
+}
+
+/* .scrolling {
   overflow-x: hidden;
   overflow-y: auto;
-}
+} */
 
-.bet-list {
+/* .bet-list {
   height: 5em;
-}
+} */
 
-.game-stats-table {
-  width: 60em;
-  font-family: serif;
-}
-.game-stats-td {
-  height: 3em;
-  width: 24%;
-  align-content: center;
-  text-align: right;
-}
-
-.bet-button {
-  display: inline-block;
-  background-color: #ffd700;
-  border: 0.1em solid #000000;
-  color: black;
-  font-size: 1.5em;
-  text-align: center;
-  cursor: pointer;
-  margin: 0.1em;
-  padding: 0.1em;
-  border-radius: 0.1em;
-  min-width: 5em;
-}
-.bet-button:hover {
-  opacity: 0.8;
-}
-.bet-button:active {
-  background-color: #cfb000
-}
-
-.bet-button-inactive {
-  background-color: #666;
-  color: white;
-  border: 0.1em solid #333;
-}
-.bet-button-inactive:hover {
-  opacity: 1;
-}
-.bet-button-inactive:active {
-  background-color: #666;
-}
-
-.title {
-  border: 0.1em solid #ffd700;
-  border-radius: 0.2em;
-  font-size: 2em;
-  font-weight: 900;
-  color: #ffd700;
-}
-.game-stats {
-  margin-bottom: 4em;
-  color: white;
-  font-size: 1.2em;
-}
 </style>

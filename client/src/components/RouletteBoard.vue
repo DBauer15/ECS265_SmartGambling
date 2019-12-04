@@ -85,9 +85,18 @@
               }"
             ></BoardCell>
           </td>
+          <!--
           <td rowspan="5">
             <Chips>
             </Chips>
+          </td>
+          -->
+          <td rowspan="5">
+            <div class="bet-list scrolling">
+              <div
+                v-for="bet in $store.state.bets"
+              >{{bet.amount}} Ξ on {{bet.bet_type}}-{{bet.bet_number}}</div>
+            </div>
           </td>
         </tr>
         <tr>
@@ -287,11 +296,18 @@ td {
 }
 
 .wheel-still {
-  animation: wheel-spin-animation 120s linear infinite;
+  animation: wheel-spin-animation s linear infinite;
 }
 
 .wheel-spinning {
   animation: wheel-spin-animation 1.2s linear infinite;
+}
+
+.game-stats-td {
+  height: 100%;
+  width: 24%;
+  align-content: center;
+  text-align: right;
 }
   
 
