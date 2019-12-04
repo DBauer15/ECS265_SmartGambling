@@ -1,6 +1,6 @@
 <template>
   <div class="game-balance-status">
-    <div class="title">ETHEREUM</div>
+    <div class="title">BALANCES</div>
     <div class="balances">
       <div class="labels">
         Last Prize:
@@ -41,13 +41,14 @@ export default {};
 .game-balance-status .title {
   color: #ffd700;
   border-bottom: 0.1em solid #ffd700;
-  height: 30%;
   font-weight: 700;
+  padding: 0.7em 0;
 }
 
 .game-balance-status .balances {
   display: flex;
   justify-content: space-between;
+  padding: 0.7em 0;
 }
 
 .game-balance-status .balances .labels {
@@ -60,15 +61,5 @@ export default {};
   width: 30%;
   color: #ffffff;
   text-align: left;
-}
-
-.round-closed {
-  font-size: 1.5em;
-  color: red;
-}
-
-.round-open {
-  font-size: 1.5em;
-  color: yellow;
 }
 </style>

@@ -13,30 +13,32 @@
 import Api from "../api";
 
 export default {
-  clear_bets() {
-    this.$store.state.bets = [];
-  },
-  send_bets() {
-    if (!this.$store.state.round_open) {
-      return;
-    }
+  methods: {
+    clear_bets() {
+      this.$store.state.bets = [];
+    },
+    send_bets() {
+      if (!this.$store.state.round_open) {
+        return;
+      }
 
-    for (var bet of this.$store.state.bets) {
-      Api.EnterBet(bet.amount, bet.bet_type, bet.bet_number);
-    }
+      for (var bet of this.$store.state.bets) {
+        Api.EnterBet(bet.amount, bet.bet_type, bet.bet_number);
+      }
 
-    this.clear_bets();
+      this.clear_bets();
+    }
   }
 };
 </script>
 
 <style>
 .game-round-buttons {
-    width: 32%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+  width: 32%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .game-round-buttons .button {
@@ -46,13 +48,12 @@ export default {
   text-align: center;
   cursor: pointer;
   margin: 0.1em;
-  padding: 0.1em;
+  padding: 0.9em;
   border-radius: 0.5em;
   min-width: 5em;
-  height: 42%;
-  /* line-height: 3em; */
-    vertical-align: middle;
-    display: table-cell;
+  vertical-align: middle;
+  display: table-cell;
+  line-height: 100%;
 }
 
 .game-round-buttons .button:hover {
@@ -78,11 +79,10 @@ export default {
 }
 
 .game-round-buttons .button.clear {
-  background-color:red;
+  background-color: red;
 }
 
 .game-round-buttons .button.bet {
   background-color: #ffd700;
 }
-
 </style>

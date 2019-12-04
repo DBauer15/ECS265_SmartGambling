@@ -47,13 +47,13 @@ export default {
 
 .game-stats-container .flex-grid .col {
   flex: 1;
-    height: 15em;
+  height: 15em;
 }
 
 .game-stats-container .flex-grid-thirds {
   display: flex;
   justify-content: space-between;
-    height: 10em;
+  height: 13em;
 }
 
 /* .scrolling {

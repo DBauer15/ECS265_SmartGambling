@@ -296,7 +296,7 @@ td {
 }
 
 .wheel-still {
-  animation: wheel-spin-animation s linear infinite;
+  /*animation: wheel-spin-animation s linear infinite;*/
 }
 
 .wheel-spinning {
