@@ -25,10 +25,11 @@ export default {};
 
 <style>
 .game-round-status {
-  width: 32%;
+  width: 25%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin: 0 1em;
 }
 
 .game-round-status .round-status {
@@ -54,7 +55,7 @@ export default {};
 }
 
 .game-round-status .round-open {
-  color: green !important;
+  color: white !important;
   font-weight: 700;
   padding: 0.7em 0;
 }

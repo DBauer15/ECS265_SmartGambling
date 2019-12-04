@@ -3,7 +3,7 @@
     <div class="button clear" v-on:click="clear_bets">CLEAR</div>
     <div
       class="button bet"
-      v-bind:class="$store.state.round_open ? '' : 'bet-button-inactive'"
+      v-bind:class="$store.state.round_open ? '' : 'inactive'"
       v-on:click="send_bets"
     >BET</div>
   </div>
@@ -34,55 +34,61 @@ export default {
 
 <style>
 .game-round-buttons {
-  width: 32%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
 }
 
 .game-round-buttons .button {
   display: inline-block;
-  color: black;
+  font-weight: 900;
   font-size: 1.5em;
   text-align: center;
   cursor: pointer;
-  margin: 0.1em;
-  padding: 0.9em;
+  margin: 0 0.7em;
+  padding: 0.5em;
   border-radius: 0.5em;
-  min-width: 5em;
-  vertical-align: middle;
+  min-width: 6em;
   display: table-cell;
-  line-height: 100%;
-}
-
-.game-round-buttons .button:hover {
-  opacity: 0.8;
-}
-
-.game-round-buttons .button:active {
-  background-color: #cfb000;
-}
-
-.game-round-buttons .button-inactive {
-  background-color: #666;
+  border: 0.1em solid transparent;
   color: white;
-  border: 0.1em solid #333;
-}
-
-.game-round-buttons .button-inactive:hover {
-  opacity: 1;
-}
-
-.game-round-buttons .button-inactive:active {
-  background-color: #666;
 }
 
 .game-round-buttons .button.clear {
-  background-color: red;
+  border: 0.1em solid #ff0000;
+  background-color: #ff0000;
+
 }
 
 .game-round-buttons .button.bet {
-  background-color: #ffd700;
+  border: 0.1em solid #ecc900;
+  background-color: #ecc900;
+}
+
+.game-round-buttons .button.clear:hover {
+  background-color: #ff3535;
+}
+
+.game-round-buttons .button.bet:hover {
+  background-color: #ffdf2a;
+}
+
+.game-round-buttons .button:active {
+  opacity: 0.8;
+}
+
+.game-round-buttons .button.inactive {
+  background-color: #666;
+  color: white;
+  border: 0.1em solid #666;
+  cursor: default;
+  opacity: 0.7;
+}
+
+.game-round-buttons .button.inactive:hover {
+  background-color: #666;
+}
+
+.game-round-buttons .button.inactive:active {
+  background-color: #666;
+  opacity: 0.7;
 }
 </style>

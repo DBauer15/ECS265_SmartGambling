@@ -16,6 +16,9 @@
         <br />
         {{$store.state.value_in_bets}} Ξ
         <br />
+        {{$store.state.last_prize
+        + $store.state.previous_winnings
+        - $store.state.value_in_bets}} Ξ
       </div>
     </div>
   </div>
@@ -27,15 +30,10 @@ export default {};
 
 <style>
 .game-balance-status {
-  width: 32%;
+  width: 40%;
   border: 0.2em solid #ffd700;
   border-radius: 1em;
-  /*   height: 5em !important;
-  width: 33%;
-  margin: 10 auto;
-  padding: 10;
-  border: solid 0.1em #cfb000;
-  border-radius: 1em; */
+  margin: 0 1em;
 }
 
 .game-balance-status .title {

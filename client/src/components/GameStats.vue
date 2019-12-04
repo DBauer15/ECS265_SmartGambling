@@ -3,20 +3,13 @@
   <div class="game-stats-container">
     <!-- logo -->
     <div class="flex-grid">
-      <div class="col">
-        <img
-          src="../assets/logo_placeholder.png"
-          width="300"
-          class="wheel"
-          v-bind:class="$store.state.round_open ? 'wheel-spinning' : 'wheel-still'"
-        />
-      </div>
+
     </div>
     <!-- stats element container -->
     <div class="flex-grid-thirds">
       <GameRoundStatus></GameRoundStatus>
       <GameBalanceStatus></GameBalanceStatus>
-      <GameRoundButtons></GameRoundButtons>
+      <BetScroll></BetScroll>
     </div>
   </div>
 </template>
@@ -24,21 +17,20 @@
 <script>
 import GameRoundStatus from "./GameRoundStatus.vue";
 import GameBalanceStatus from "./GameBalanceStatus.vue";
-import GameRoundButtons from "./GameRoundButtons.vue";
+import BetScroll from "./BetScroll.vue";
 
 export default {
   components: {
     GameRoundStatus,
     GameBalanceStatus,
-    GameRoundButtons
+    BetScroll,
   }
 };
 </script>
 
 <style>
 .game-stats-container {
-  width: 70%;
-  height: 30em;
+  width: 40%;
 }
 
 .game-stats-container .flex-grid {

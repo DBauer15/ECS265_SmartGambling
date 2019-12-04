@@ -11,13 +11,14 @@ class Api {
         this.contract = new this.web3.eth.Contract(Abi, store.state.contract_address)
         this.contract.events.RoundStarted(null, (error, event) => {
             store.state.round_open = true
-            store.state.previous_winnings += store.state.last_prize - store.state.value_in_bets
+            store.state.previous_winnings += store.state.last_prize
             store.state.last_prize = 0
-            store.state.value_in_bets = 0
         })
         this.contract.events.RoundEnded(null, (error, event) => {
             store.state.round_open = false
             store.state.round_result = event.returnValues.roundResult
+            store.state.previous_winnings -= store.state.value_in_bets
+            store.state.value_in_bets = 0
         })
         this.contract.events.RoundPrize(null, (error, event) => {
             store.state.last_prize += parseFloat(Web3.utils.fromWei(event.returnValues.prize, 'ether'))

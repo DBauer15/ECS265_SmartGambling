@@ -12,7 +12,7 @@ export default new Vuex.Store({
         value_in_bets: 0,
         selected_chip_value: "1",
         bets: [],
-        contract_address: '0x821eB807941ca09a8d2bff42b742aA79be9aa928',
-        account_address: '0xdC85acBc7D611DC9fA3392c5aDC6Df0C5a2310FD',
+        contract_address: '0xC9209c7E85170Bc5a95f5ADFE9f1b652D845CB80',
+        account_address: '0x0B70eC32659c053Fc6e5c96B0B5e829439f11769',
     }
 })

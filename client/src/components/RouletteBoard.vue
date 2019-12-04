@@ -1,6 +1,5 @@
 <template>
   <div>
-    <GameStats></GameStats>
     <table>
       <tbody>
         <tr>
@@ -85,18 +84,8 @@
               }"
             ></BoardCell>
           </td>
-          <!--
           <td rowspan="5">
-            <Chips>
-            </Chips>
-          </td>
-          -->
-          <td rowspan="5">
-            <div class="bet-list scrolling">
-              <div
-                v-for="bet in $store.state.bets"
-              >{{bet.amount}} Ξ on {{bet.bet_type}}-{{bet.bet_number}}</div>
-            </div>
+            <Chips />
           </td>
         </tr>
         <tr>
@@ -234,19 +223,18 @@
         </tr>
       </tbody>
     </table>
+    
   </div>
 </template>
 
 <script>
 import BoardCell from "./BoardCell.vue";
-import GameStats from "./GameStats.vue";
 import Chips from "./Chips.vue";
 
 export default {
   components: {
     BoardCell,
-    GameStats,
-    Chips,
+    Chips
   },
   data() {
     return {
@@ -262,54 +250,26 @@ export default {
         [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34]
       ]
     };
-  },
+  }
 };
 </script>
 
 <style>
 table {
-  border: none;
-}
-th,
-td {
-  border: none;
-}
-.chips {
-  color: #ffd700;
-  border: solid 1em #ffd700;
-  width: 10em;
-}
-.chips:hover {
-  cursor: pointer;
-  opacity: 0.7;
-}
-.chips:active {
-  cursor: pointer;
-  opacity: 1;
-  color: black;
-  background-color: #ffd700;
+  margin-right: 11em;
 }
 
 .wheel {
-  margin-right: 2em;
-  
+  margin-right: 4em;
 }
 
 .wheel-still {
-  /*animation: wheel-spin-animation s linear infinite;*/
+  animation: wheel-spin-animation 120s linear infinite;
 }
 
 .wheel-spinning {
   animation: wheel-spin-animation 1.2s linear infinite;
 }
-
-.game-stats-td {
-  height: 100%;
-  width: 24%;
-  align-content: center;
-  text-align: right;
-}
-  
 
 @keyframes wheel-spin-animation {
   0% {

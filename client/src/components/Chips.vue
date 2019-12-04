@@ -3,15 +3,15 @@
     <ul>
       <li>
         <input type="radio" value="1" name="radio" id="radio1" v-model="$store.state.selected_chip_value" checked/>
-        <label for="radio1">Value 1</label>
+        <label for="radio1"><img src="../assets/coin1.svg" width="100"></label>
       </li>
       <li>
-        <input type="radio" value="2" name="radio" id="radio2" v-model="$store.state.selected_chip_value" />
-        <label for="radio2">Value 2</label>
+        <input type="radio" value="5" name="radio" id="radio2" v-model="$store.state.selected_chip_value" />
+        <label for="radio2"><img src="../assets/coin5.svg" width="100"></label>
       </li>
       <li>
-        <input type="radio" value="3" name="radio" id="radio3" v-model="$store.state.selected_chip_value" />
-        <label for="radio3">Value 3</label>
+        <input type="radio" value="10" name="radio" id="radio3" v-model="$store.state.selected_chip_value" />
+        <label for="radio3"><img src="../assets/coin10.svg" width="100"></label>
       </li>
     </ul>
   </div>
@@ -34,8 +34,9 @@ input {
 }
 label {
   cursor: pointer;
+  opacity: 0.6;
 }
 input:checked + label {
-  background: red;
+  opacity: 1;
 }
 </style>
