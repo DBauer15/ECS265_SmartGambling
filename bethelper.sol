@@ -18,7 +18,7 @@ contract BetHelper {
         1, // HIGH/LOW
         2, // Dozens
         2, // Columns
-        35, // Straight
+        36, // Straight
         56, // Split
         11, // Street
         21, // Corner
@@ -55,7 +55,7 @@ contract BetHelper {
         ];
         winningBetNumbers[2] = [   // HIGH/LOW
             [19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36],
-            [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+            [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
         ];
         winningBetNumbers[3] = [   // Dozens
             [1,2,3,4,5,6,7,8,9,10,11,12],

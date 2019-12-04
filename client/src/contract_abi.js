@@ -58,11 +58,30 @@ export default [
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "",
+				"name": "roundResult",
 				"type": "uint256"
 			}
 		],
 		"name": "RoundEnded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "winner",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "prize",
+				"type": "uint256"
+			}
+		],
+		"name": "RoundPrize",
 		"type": "event"
 	},
 	{

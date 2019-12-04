@@ -8,7 +8,8 @@
             <img
               src="../assets/wheel.png"
               width="300"
-              style="margin-right: 2em;"
+              class="wheel"
+              v-bind:class="$store.state.round_open ? 'wheel-spinning' : 'wheel-still'"
             />
           </td>
           <td rowspan="3">
@@ -233,9 +234,6 @@ import GameStats from "./GameStats.vue";
 import Chips from "./Chips.vue";
 
 export default {
-  mounted() {
-    this.$root.$on("add_bet", this.add_bet);
-  },
   components: {
     BoardCell,
     GameStats,
@@ -256,11 +254,6 @@ export default {
       ]
     };
   },
-  methods: {
-    add_bet(type, number) {
-      console.log(type, number);
-    }
-  }
 };
 </script>
 
@@ -286,5 +279,28 @@ td {
   opacity: 1;
   color: black;
   background-color: #ffd700;
+}
+
+.wheel {
+  margin-right: 2em;
+  
+}
+
+.wheel-still {
+  animation: wheel-spin-animation 120s linear infinite;
+}
+
+.wheel-spinning {
+  animation: wheel-spin-animation 1.2s linear infinite;
+}
+  
+
+@keyframes wheel-spin-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

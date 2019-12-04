@@ -23,7 +23,8 @@ contract SmartRoulette {
 
     // Events for game status change
     event RoundStarted();
-    event RoundEnded(uint);
+    event RoundEnded(uint roundResult);
+    event RoundPrize(address winner, uint prize);
 
     // This modifier can be used to restrict some function calls
     modifier onlyBy(address _account) {
@@ -145,6 +146,7 @@ contract SmartRoulette {
                     // The bank only has to pay the profit
                     bank -= profit;
                     addresses[i].transfer(prize);
+                    emit RoundPrize(addresses[i], prize);
                 }
             }
         }

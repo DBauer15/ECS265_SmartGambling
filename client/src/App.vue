@@ -5,10 +5,12 @@
 </template>
 
 <script>
+import store from './store/GameState'
 import RouletteBoard from './components/RouletteBoard.vue'
 
 export default {
   name: 'app',
+  store,
   components: {
     RouletteBoard
   }
@@ -17,6 +19,7 @@ export default {
 
 <style>
 #app {
+  user-select: none;
   box-sizing: border-box;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
