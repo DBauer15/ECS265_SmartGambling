@@ -2,7 +2,7 @@
   <div class="game-stats">
     <table class="game-stats-table">
       <tr>
-        <th class="title" colspan="3">SMART GAMBLING</th>
+        <th class="title" colspan="4">SMART GAMBLING</th>
       </tr>
       <tr>
         <td class="game-stats-td">
@@ -14,8 +14,10 @@
         </td>
         <td class="game-stats-td" v-bind:class="$store.state.round_open ? 'round-open' : 'round-closed'">{{$store.state.round_open ? 'Round Open' : 'Round Closed'}}</td>
         <td class="game-stats-td">
-          Current Prize: {{$store.state.last_prize}} Ξ<br>
-          Total Winnings: {{$store.state.total_winnings}} Ξ<br>
+          Last Prize: {{$store.state.last_prize}} Ξ<br>
+          Previous Winnings: {{$store.state.previous_winnings}} Ξ<br>
+          Value in Bets: {{$store.state.value_in_bets}} Ξ<br>
+          Total: {{$store.state.last_prize + $store.state.previous_winnings - $store.state.value_in_bets}} Ξ<br>
           Round Result: {{$store.state.round_open || $store.state.round_result == -1 ? '-' : $store.state.round_result}}
         </td>
         <td class="game-stats-td">
@@ -32,11 +34,6 @@ import Api from '../api'
 
 
 export default {
-
-  mounted() {
-
-  },
-
   methods: {
     clear_bets() {
       this.$store.state.bets = []
@@ -78,13 +75,14 @@ export default {
 }
 
 .game-stats-table {
-  width: 70em;
+  width: 60em;
   font-family: serif;
 }
 .game-stats-td {
   height: 3em;
   width: 24%;
   align-content: center;
+  text-align: right;
 }
 
 .bet-button {

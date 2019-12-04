@@ -11,8 +11,9 @@ class Api {
         this.contract = new this.web3.eth.Contract(Abi, store.state.contract_address)
         this.contract.events.RoundStarted(null, (error, event) => {
             store.state.round_open = true
-            store.state.total_winnings += store.state.last_prize
+            store.state.previous_winnings += store.state.last_prize - store.state.value_in_bets
             store.state.last_prize = 0
+            store.state.value_in_bets = 0
         })
         this.contract.events.RoundEnded(null, (error, event) => {
             store.state.round_open = false
@@ -21,6 +22,11 @@ class Api {
         this.contract.events.RoundPrize(null, (error, event) => {
             store.state.last_prize += parseFloat(Web3.utils.fromWei(event.returnValues.prize, 'ether'))
         })
+
+        // Check game state initially
+        this.IsRoundOpen().then((result) => {
+            store.state.round_open = result;
+        })
     }
 
     IsRoundOpen() {
@@ -28,6 +34,8 @@ class Api {
     }
 
     EnterBet(amount, bet_type, bet_number) {
+        store.state.value_in_bets += parseInt(amount)
+
         return this.contract.methods.EnterBet(bet_type, bet_number).send({
             from: store.state.account_address,
             gas: 3000000,

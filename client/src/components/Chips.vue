@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li>
-        <input type="radio" value="1" name="radio" id="radio1"  v-model="$store.state.selected_chip_value" checked/>
+        <input type="radio" value="1" name="radio" id="radio1" v-model="$store.state.selected_chip_value" checked/>
         <label for="radio1">Value 1</label>
       </li>
       <li>
