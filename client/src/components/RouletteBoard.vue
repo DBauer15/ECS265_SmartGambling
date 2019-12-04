@@ -44,7 +44,7 @@
                       text: null,
                       class: 'split-v',
                       bet_type: 6,
-                      bet_number: -1 //TODO: Generate correct bet number
+                      bet_number: getVSplitNumber(i - 1, j - 1)
                     }"
                   ></BoardCell>
                   <div class="clearfix"></div>
@@ -55,7 +55,7 @@
                       text: null,
                       class: 'split-h',
                       bet_type: 6,
-                      bet_number: -1 //TODO: Generate correct bet number
+                      bet_number: getHSplitNumber(i - 1, j - 1)
                     }"
                   ></BoardCell>
                   <BoardCell
@@ -65,7 +65,7 @@
                       text: null,
                       class: 'corner',
                       bet_type: 8,
-                      bet_number: -1 //TODO: Generate correct bet number
+                      bet_number: getCornerNumber(i - 1, j - 1)
                     }"
                   ></BoardCell>
                 </div>
@@ -160,7 +160,7 @@
                 text: '1 to 18',
                 class: 'special-h2',
                 bet_type: 2,
-                bet_number: 0
+                bet_number: 1
               }"
             ></BoardCell>
           </td>
@@ -215,7 +215,7 @@
                 text: '19 to 36',
                 class: 'special-h2',
                 bet_type: 2,
-                bet_number: 1
+                bet_number: 0
               }"
             ></BoardCell>
           </td>
@@ -223,15 +223,16 @@
         </tr>
       </tbody>
     </table>
-    
   </div>
 </template>
 
 <script>
+import BetHelper from "../mixins/bet_helper";
 import BoardCell from "./BoardCell.vue";
 import Chips from "./Chips.vue";
 
 export default {
+  mixins: [BetHelper],
   components: {
     BoardCell,
     Chips
@@ -250,6 +251,17 @@ export default {
         [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34]
       ]
     };
+  },
+  methods: {
+    getVSplitNumber(i, j) {
+      return this.board_to_v_split[i][j]
+    },
+    getHSplitNumber(i, j) {
+      return this.board_to_h_split[i][j]
+    },
+    getCornerNumber(i, j) {
+      return this.board_to_corner[i][j]
+    },
   }
 };
 </script>

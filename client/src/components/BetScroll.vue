@@ -2,13 +2,22 @@
   <div class="bet-scroll">
     <div class="title">BETS</div>
     <div class="bets">
-      <div v-for="bet in $store.state.bets">{{bet.amount}} Ξ on {{bet.bet_type}}-{{bet.bet_number}}</div>
+      <div v-for="bet in $store.state.bets">{{bet.amount}} Ξ on {{getBetName(bet)}}</div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import BetHelper from '../mixins/bet_helper'
+export default {
+  mixins: [BetHelper],
+  methods: {
+    getBetName(bet) {
+      return this.type_number_to_name[bet.bet_type][bet.bet_number]
+    }
+  }
+
+};
 </script>
 
 <style>
